@@ -76,7 +76,7 @@ resource "aws_security_group" "name" {
 }
 resource "aws_instance" "name" {
   ami = "ami-02457590d33d576c3"
-  key_name = "public.pem"
+  key_name = "public"
   subnet_id = aws_subnet.name.id
   associate_public_ip_address = true
   security_groups = [ aws_security_group.name.id ]
