@@ -78,9 +78,17 @@ resource "aws_instance" "name" {
   ami = "ami-02457590d33d576c3"
   key_name = "public.pem"
   subnet_id = aws_subnet.name.id
-  associate_public_ip_address = false
+  associate_public_ip_address = true
   security_groups = [ aws_security_group.name.id ]
   instance_type = "t2.micro"
+  user_data = <<-EOF
+              #!/bin/bash
+              yum update -y
+              yum install -y httpd
+              systemctl enable httpd
+              systemctl start httpd
+              echo "<h1>Welcome to COVERBAZAR Cloud Server</h1>" > /var/www/html/index.html
+              EOF
   tags = {
     Name="sample"
   }
