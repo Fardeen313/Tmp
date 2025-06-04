@@ -79,7 +79,7 @@ resource "aws_instance" "name" {
   key_name = "public"
   subnet_id = aws_subnet.name.id
   associate_public_ip_address = true
-  security_groups = [ aws_security_group.name.id ]
+  vpc_security_group_ids = [ aws_security_group.name.id ]
   instance_type = "t2.micro"
   user_data = <<-EOF
               #!/bin/bash
